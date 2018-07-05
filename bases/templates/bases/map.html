@@ -1,10 +1,12 @@
-{% load static %}
+{% extends 'index.html' %}
 
-<link rel="stylesheet" href="{% static 'style.css' %}">
+{% block content %}
 
-MAP
-<br>
-List of bases
-{% for base in bases %}
-    <li>{{ base }}
-{% endfor %}
+    MAP
+    <br>
+    List of bases
+    {% for base in bases %}
+        <li>{{ base }}
+    {% endfor %}
+
+{% endblock %}
