@@ -18,6 +18,10 @@ class Base(models.Model):
     vip = models.IntegerField(default=0)
     vip_end_date = models.IntegerField(default=0)
 
+    class Meta:
+        managed = False
+        db_table = 'bases'
+
     def __str__(self):
         return self.name
 
@@ -50,3 +54,7 @@ class Comments(models.Model):
     rating = models.IntegerField(default=0)
     date = models.DateTimeField()
     ip = models.CharField(max_length=15)
+
+    class Meta:
+        managed = False
+        db_table = 'comments'
