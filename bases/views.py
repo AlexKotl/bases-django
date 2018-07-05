@@ -1,8 +1,10 @@
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
+from .models import Base
 
 def map(request):
-    return render(request, 'bases/map.html', {})
+    bases_list = Base.get_all(request)
+    return render(request, 'bases/map.html', {'bases': bases_list})
 
 def list(request):
     return render(request, 'bases/list.html', {})
