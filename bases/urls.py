@@ -21,5 +21,6 @@ urlpatterns = [
     path('', views.map, name='map'),
     path('list/', views.list, name='list'),
     path('add/', views.add, name='add'),
+    path('contacts/', views.map, name='contacts'),
     path('<str:base_name>/', views.details, name='details'),
 ]
