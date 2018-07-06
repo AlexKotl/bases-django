@@ -22,5 +22,5 @@ urlpatterns = [
     path('list/', views.list, name='list'),
     path('add/', views.add, name='add'),
     path('contacts/', views.map, name='contacts'),
-    path('<str:base_name>/', views.details, name='details'),
+    path('<str:base_name>', views.details, name='details'),
 ]

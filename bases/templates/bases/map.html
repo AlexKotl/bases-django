@@ -47,7 +47,7 @@
 
     <div class='hotItems desktop'>
         {% for base in bases_latest %}
-            <a class='item {% if base.vip > 0 %}vip{% endif %}' href=''>
+            <a class='item {% if base.vip > 0 %}vip{% endif %}' href='{% url 'details' base.url %}'>
                 <div class='header'>{{ base.name }}</div>
                 <div class='rating'>{{ base.rating | draw_stars | safe }}</div>
                 <div class='main'>{{ base.address }}</div>
@@ -61,7 +61,7 @@
 
 <div class="hotItems mobile">
     {% for base in bases_latest %}
-        <a class='item {% if base.vip > 0 %}vip{% endif %}' href=''>
+        <a class='item {% if base.vip > 0 %}vip{% endif %}' href='{% url 'details' base.url %}'>
             <div class='header'>{{ base.name }}</div>
             <div class='rating'>{{ base.rating | draw_stars | safe }}</div>
             <div class='main'>{{ base.address }}</div>
