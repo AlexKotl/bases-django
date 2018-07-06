@@ -7,7 +7,8 @@ def map(request):
     return render(request, 'bases/map.html', {'bases': bases_list})
 
 def list(request):
-    return render(request, 'bases/list.html', {})
+    bases_list = Base.get_all(request)
+    return render(request, 'bases/list.html', {'bases': bases_list})
 
 def details(request, base_name):
     return render(request, 'bases/details.html', {})
