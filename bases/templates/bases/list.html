@@ -1,10 +1,58 @@
 {% extends 'index.html' %}
+{% load static %}
+
+{% block site_title %}Список репетициооных баз. Рейтинг, контакты, цены репетиций.{% endblock %}
 
 {% block content %}
 
-    List of bases
-    {% for base in bases %}
-        <li>{{ base }}
-    {% endfor %}
+    <script src='{% static 'js/sortabletable/js/sortabletable.js' %}' type='text/javascript'></script>
+    <script src='{% static 'js/sortabletable/tr_color.js' %}' type='text/javascript'></script>
+    <link href='{% static 'js/sortabletable/css/sortabletable.css' %}' type='text/css' rel='StyleSheet'>
+
+    <p>
+    <table border=0 class='sort-table' id='table_stock' cellspacing='1' width='100%'  style='background-color:#BEBEBE'>
+        <thead style='color:#000000'>
+            <tr>
+                <td width='100'>Рейтинг</td>
+                <td>Название</td>
+                <td>Адрес</td>
+                <td>Описание</td>
+                <td>Отзывы</td>
+                <td>Средняя цена</td>
+            </tr>
+        </thead>
+        <tbody id='t_body'>
+
+            {% for base in bases %}
+                <tr class='{% if base.vip > 0 %}vip{% endif %}'>
+                    <td class='image'><a href=''>{$img}</a></td>
+                    <td class='rating'>".get_rating_view($row[rating])."</td>
+                    <td class='title'><a href=''>{{ base.name }}</a></td>
+                    <td class='address'>{{ base.address }}</td>
+                    <td class='description'>
+                        <a href='' style='font-size:11px'>
+                            {{ base.description | slice:"0:50" }}
+                        </a>
+                    </td>
+                    <td class='comments'>$comments_count</td>
+                    <td class='price'>{{ base.price }} грн</td>
+                </tr>
+            {% endfor %}
+
+        </tbody>
+
+        <tr>
+            <td colspan=6 bgcolor='#F7F7F7'> Всего баз: <b>{{ bases | length }}</b>  </td>
+        </tr>
+    </table>
+
+    <script type='text/javascript'>
+        var st1 = new SortableTable(document.getElementById('table_stock'),
+        ['None', 'String', 'Number', 'String', 'String', 'Number', 'Number', 'None', $additional_col 'None']);
+    </script>
+    <script>
+        trsetcolor('t_body', '#D6D7D8', '#ECECEC');  // назначаем функции для изменения цвета при наведении миши
+        trsetcolor_now('t_body', '#ECECEC');     // красим единоразово ячейки
+    </script>
 
 {% endblock %}
