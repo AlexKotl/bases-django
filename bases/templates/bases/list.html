@@ -28,7 +28,7 @@
                 <tr class='{% if base.vip > 0 %}vip{% endif %}'>
                     <td class='image'><a href=''>{$img}</a></td>
                     <td class='rating'>
-                        {{ base.rating|draw_stars }}
+                        {{ base.rating | draw_stars | safe }}
                     </td>
                     <td class='title'><a href=''>{{ base.name }}</a></td>
                     <td class='address'>{{ base.address }}</td>
