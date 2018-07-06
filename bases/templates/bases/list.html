@@ -10,8 +10,8 @@
     <script src='{% static 'js/sortabletable/tr_color.js' %}' type='text/javascript'></script>
     <link href='{% static 'js/sortabletable/css/sortabletable.css' %}' type='text/css' rel='StyleSheet'>
 
-    <p>
-    <table border=0 class='sort-table' id='table_stock' cellspacing='1' width='100%'  style='background-color:#BEBEBE'>
+    <div style="padding:15px 10px">
+    <table border=0 class='sort-table' id='table_stock' cellspacing='1' width='100%'  style='background-color:#BEBEBE; '>
         <thead style='color:#000000'>
             <tr>
                 <td width='100'>Рейтинг</td>
@@ -48,14 +48,15 @@
             <td colspan=6 bgcolor='#F7F7F7'> Всего баз: <b>{{ bases | length }}</b>  </td>
         </tr>
     </table>
+    </div>
 
     <script type='text/javascript'>
         var st1 = new SortableTable(document.getElementById('table_stock'),
         ['None', 'String', 'Number', 'String', 'String', 'Number', 'Number', 'None', $additional_col 'None']);
     </script>
     <script>
-        trsetcolor('t_body', '#D6D7D8', '#ECECEC');  // назначаем функции для изменения цвета при наведении миши
-        trsetcolor_now('t_body', '#ECECEC');     // красим единоразово ячейки
+        trsetcolor('t_body', '#D6D7D8', '#ffffff');  // назначаем функции для изменения цвета при наведении миши
+        trsetcolor_now('t_body', '#ffffff');     // красим единоразово ячейки
     </script>
 
 {% endblock %}

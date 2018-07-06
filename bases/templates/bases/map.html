@@ -1,12 +1,72 @@
 {% extends 'index.html' %}
 
+{% load static %}
+
 {% block content %}
 
-    MAP
-    <br>
-    List of bases
-    {% for base in bases %}
-        <li>{{ base }}
-    {% endfor %}
+<script type="text/javascript">
+    function initMaps() {
+
+        function addMoreMarker(pos_x,pos_y,hint,descr,img_path,zindex) {
+            var point = new google.maps.LatLng(pos_y,pos_x);
+            var marker = new google.maps.Marker({
+                position: point,
+                map: map,
+                title:hint,
+                icon: img_path,
+                zIndex: zindex
+            });
+            var infowindow = new google.maps.InfoWindow({
+                content: descr,
+                maxWidth: 300
+            });
+            google.maps.event.addListener(marker, 'click', function() {
+                infowindow.open(map, marker);
+            });
+        }
+
+        var center_point = new google.maps.LatLng(50.455203,30.511413);
+        var myOptions = {
+            zoom: 11,
+            center: center_point,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+
+        [js_markers]
+
+    }
+
+</script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVMQO9ASVnYw6XIWotOftE7cTs5ZV_ETU">	</script>
+
+<div id='slides'>
+    <a href="#" class="slidesjs-previous slidesjs-navigation"><span class="icon nav next"></span></a>
+    <a href="#" class="slidesjs-next slidesjs-navigation"><span class="icon nav prev"></span></a>
+
+    <div class='hotItems desktop'>
+        [last_updates]
+    </div>
+</div>
+
+<div class="hotItems mobile">
+    [last_updates_mobile]
+</div>
+
+[page_content]
+
+<div id='map_canvas' ></div>
+
+<div  style='display:block; width:100%; border:0px solid #D4D4D4; padding:10px; margin:10px auto ;  box-sizing:border-box;'>
+<table border=0 width='100%'>
+    <tr>
+        <td><img src='{% static 'images/markers/pointer_red.png' %}/'></td><td style='text-align:left'>Репетиционная база</td>
+        <td><img src='{% static 'images/markers/pointer_star.png' %}/'></td><td style='text-align:left'>База с высоким рейтингом</td>
+        <td><img src='{% static 'images/markers/pointer_grey.png' %}/'></td><td style='text-align:left'>База с устаревшими данными</td>
+    </tr>
+</table>
+</div>
+
+
 
 {% endblock %}
