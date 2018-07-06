@@ -2,6 +2,7 @@ from django.db import models
 
 class Base(models.Model):
     name = models.CharField(max_length=255)
+    url = models.CharField(max_length=255)
     pos_x = models.FloatField(default=0)
     pos_y = models.FloatField(default=0)
     description = models.TextField()
@@ -23,7 +24,7 @@ class Base(models.Model):
         db_table = 'bases'
 
     def __str__(self):
-        return self.name
+        return "{name} ({id})".format(name=self.name, id=self.id)
 
     def url_name(self):
         return name

@@ -14,7 +14,9 @@ def list(request):
     })
 
 def details(request, base_name):
-    return render(request, 'bases/details.html', {})
+    return render(request, 'bases/details.html', {
+        'base': Base.objects.get(url=base_name)
+    })
 
 def add(request):
     return render(request, 'bases/add.html', {})
