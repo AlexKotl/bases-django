@@ -2,7 +2,6 @@ from django import template
 
 register = template.Library()
 
+@register.filter
 def draw_stars(value):
     return "xxxxx"
-
-register.filter('draw_stars', draw_stars)
