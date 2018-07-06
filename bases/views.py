@@ -3,12 +3,15 @@ from django.urls import reverse
 from .models import Base
 
 def map(request):
-    bases_list = Base.get_all(request)
-    return render(request, 'bases/map.html', {'bases': bases_list})
+    return render(request, 'bases/map.html', {
+        'bases': Base.get_all(request),
+        'bases_latest': Base.get_latest(request),
+    })
 
 def list(request):
-    bases_list = Base.get_all(request)
-    return render(request, 'bases/list.html', {'bases': bases_list})
+    return render(request, 'bases/list.html', {
+        'bases': Base.get_all(request),
+    })
 
 def details(request, base_name):
     return render(request, 'bases/details.html', {})

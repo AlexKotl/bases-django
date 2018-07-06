@@ -35,7 +35,7 @@ class Base(models.Model):
             ORDER BY vip DESC, vip_end_date DESC, id DESC''')
 
     def get_latest(self):
-        return Base.obkects.raw('''
+        return Base.objects.raw('''
             SELECT * FROM bases where flag='ok'
             ORDER BY FIELD(vip, 1) DESC,
             CASE

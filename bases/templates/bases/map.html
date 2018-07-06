@@ -1,6 +1,7 @@
 {% extends 'index.html' %}
 
 {% load static %}
+{% load draw_stars %}
 
 {% block content %}
 
@@ -45,12 +46,27 @@
     <a href="#" class="slidesjs-next slidesjs-navigation"><span class="icon nav prev"></span></a>
 
     <div class='hotItems desktop'>
-        [last_updates]
+        {% for base in bases_latest %}
+            <a class='item {% if base.vip > 0 %}vip{% endif %}' href=''>
+                <div class='header'>{{ base.name }}</div>
+                <div class='rating'>{{ base.rating | draw_stars | safe }}</div>
+                <div class='main'>{{ base.address }}</div>
+            </a>
+            {% if forloop.counter == 6 %}
+                </div> <div class='hotItems'>
+            {% endif %}
+        {% endfor %}
     </div>
 </div>
 
 <div class="hotItems mobile">
-    [last_updates_mobile]
+    {% for base in bases_latest %}
+        <a class='item {% if base.vip > 0 %}vip{% endif %}' href=''>
+            <div class='header'>{{ base.name }}</div>
+            <div class='rating'>{{ base.rating | draw_stars | safe }}</div>
+            <div class='main'>{{ base.address }}</div>
+        </a>
+    {% endfor %}
 </div>
 
 [page_content]
