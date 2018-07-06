@@ -1,5 +1,6 @@
 {% extends 'index.html' %}
 {% load static %}
+{% load draw_stars %}
 
 {% block site_title %}Список репетициооных баз. Рейтинг, контакты, цены репетиций.{% endblock %}
 
@@ -26,7 +27,9 @@
             {% for base in bases %}
                 <tr class='{% if base.vip > 0 %}vip{% endif %}'>
                     <td class='image'><a href=''>{$img}</a></td>
-                    <td class='rating'>".get_rating_view($row[rating])."</td>
+                    <td class='rating'>
+                        {{ base.rating|draw_stars }}
+                    </td>
                     <td class='title'><a href=''>{{ base.name }}</a></td>
                     <td class='address'>{{ base.address }}</td>
                     <td class='description'>
