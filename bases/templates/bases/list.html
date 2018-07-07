@@ -27,7 +27,11 @@
             {% for base in bases %}
                 <tr class='{% if base.vip > 0 %}vip{% endif %}'>
                     <td class='image'>
-                        <a href='{% url 'details' base.url %}'>{$img}</a>
+                        <a href='{% url 'details' base.url %}'>
+                            {% if base.get_images %}
+                                <img src="{{ base.get_images.pop }}" alt="">
+                            {% endif %}
+                        </a>
                     </td>
                     <td class='rating'>
                         {{ base.rating | draw_stars | safe }}

@@ -1,4 +1,6 @@
 from django.db import models
+import os.path
+from .settings_private import *
 
 class Base(models.Model):
     name = models.CharField(max_length=255)
@@ -45,6 +47,13 @@ class Base(models.Model):
                 ELSE id
                 END
             DESC LIMIT 12''')
+
+    def get_images(self):
+        images = []
+        for num in range(1,6):
+            if os.path.isfile("{dir}/{base_id}_{num}.jpg".format(dir=PHOTOS_LOCATION, base_id=self.id, num=num)):
+                images.append("{server}/{base_id}_{num}.jpg".format(server=PHOTOS_SERVER, base_id=self.id, num=num))
+        return images
 
 class Comments(models.Model):
     base = models.ForeignKey(Base, on_delete=models.CASCADE)
