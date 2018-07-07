@@ -45,7 +45,7 @@
                             {{ base.description | slice:"0:50" }}
                         </a>
                     </td>
-                    <td class='comments'>$comments_count</td>
+                    <td class='comments'>{{ base.comments_count }}</td>
                     <td class='price'>{{ base.price }} грн</td>
                 </tr>
             {% endfor %}
@@ -53,7 +53,7 @@
         </tbody>
 
         <tr>
-            <td colspan=6 bgcolor='#F7F7F7'> Всего баз: <b>{{ bases | length }}</b>  </td>
+            <td colspan=6 bgcolor='#F7F7F7'> Всего баз: <b>{{ bases.count }}</b>  </td>
         </tr>
     </table>
     </div>

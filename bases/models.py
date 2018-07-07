@@ -33,9 +33,13 @@ class Base(models.Model):
 
     def get_all(self):
         return Base.objects.raw('''
-            SELECT *, (unix_timestamp(now()) - unix_timestamp(date_edited)) as deltatime FROM bases
-            WHERE flag="ok"
-            ORDER BY vip DESC, vip_end_date DESC, id DESC''')
+            SELECT b.*, (unix_timestamp(now()) - unix_timestamp(b.date_edited)) as deltatime, COUNT(c.id) as comments_count
+            FROM bases b
+            INNER JOIN comments c ON c.base_id=b.id
+            WHERE b.flag="ok"
+            GROUP BY b.id
+            ORDER BY b.vip DESC, b.vip_end_date DESC, b.id DESC
+            ''')
 
     def get_latest(self):
         return Base.objects.raw('''
