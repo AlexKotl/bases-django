@@ -31,7 +31,7 @@ class Base(models.Model):
 
     def get_all(self):
         return Base.objects.raw('''
-            SELECT * FROM bases
+            SELECT *, (unix_timestamp(now()) - unix_timestamp(date_edited)) as deltatime FROM bases
             WHERE flag="ok"
             ORDER BY vip DESC, vip_end_date DESC, id DESC''')
 

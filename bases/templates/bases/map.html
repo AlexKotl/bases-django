@@ -34,7 +34,16 @@
         };
         var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 
-        [js_markers]
+        {% for base in bases %}
+            addMoreMarker(
+                {{ base.pos_x }},
+                {{ base.pos_y }},
+                "{{ base.name }}",
+                " IMAGE {{ base.description | slice:"0:300" }}... <p><a href='{% url 'details' base.url %}' style='font-size:14px;'><b>Подробнее</b></a>",
+                '{% static base.marker %}',
+                {{ base.zindex }}
+            );
+        {% endfor %}
 
     }
 

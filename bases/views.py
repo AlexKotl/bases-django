@@ -1,10 +1,30 @@
+import re
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from .models import Base
 
 def map(request):
+    bases = Base.get_all(request)
+    bases_updated = []
+    for base in bases:
+        base.description = base.description.replace('"', '\"')
+        base.description = re.sub('\s+', ' ', base.description)
+
+        # define marker and zindex over map
+        if base.rating >= 4 and base.votes >= 30:
+            base.marker = 'images/markers/pointer_star.png'
+            base.zindex = 3
+        elif base.deltatime > 365 * 60*60*24:
+            base.marker = 'images/markers/pointer_grey.png'
+            base.zindex = 1
+        else:
+            base.marker = 'images/markers/pointer_red.png'
+            base.zindex = 2
+
+        bases_updated.append(base)
+
     return render(request, 'bases/map.html', {
-        'bases': Base.get_all(request),
+        'bases': bases_updated,
         'bases_latest': Base.get_latest(request),
     })
 
