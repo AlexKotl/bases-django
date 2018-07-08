@@ -135,9 +135,7 @@
                 </tr>
                 <tr>
                     <td colspan='2' style='text-align:right'>
-                        Введите код:  <img src='inc/captcha.php?number=$security_code' alt=''>
-                        <input type='text' size='6' name='security'>
-                        <input type='hidden' name='security_confirm' value='$security_code'>
+                        <div class='g-recaptcha' data-sitekey='6Lc60FEUAAAAADlX54VYEjGxzniqH4wbU7euyL_R'></div>
                     </td>
                 </tr>
                 <tr>
@@ -151,7 +149,7 @@
                             </font>
                             <br>Отзывы с неправдивой информацией (группа, email),<br> а также необоснованные отзывы с заниженным <br>или завышенным рейтингом будут удалены
                         </small>
-                        <br><input type='submit' name='submit_but' value='Добавить отзыв'>
+                        <br><input type='submit' name='submit_but' value='Добавить отзыв' class="cms-button">
                     </td>
                 </tr>
             </table>
