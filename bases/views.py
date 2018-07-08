@@ -1,6 +1,7 @@
 import re
 import urllib
-from .models import Base
+import datetime
+from .models import Base, Comments
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -12,7 +13,7 @@ def map(request):
         base.description = base.description.replace('"', '\"')
         base.description = re.sub('\s+', ' ', base.description)
 
-        # define marker and zindex over map
+        # define marker and z-index over map
         if base.rating >= 4 and base.votes >= 30:
             base.marker = 'images/markers/pointer_star.png'
             base.zindex = 3
@@ -45,7 +46,19 @@ def details(request, base_name):
 
 def add_comment(request, base_id):
     base = get_object_or_404(Base, pk=base_id)
-    return HttpResponseRedirect('%s?message=%s' % (reverse('details', args=(base.url,)), "Comment added"))
+    comment = Comments(
+        base_id=base_id,
+        name=request.POST['name'],
+        email=request.POST['email'],
+        band=request.POST['band'],
+        content=request.POST['content'],
+        rating=request.POST['rating'],
+        date=datetime.datetime.now(),
+        ip=request.META.get('REMOTE_ADDR')
+    )
+    comment.save()
+
+    return HttpResponseRedirect('%s?message=%s' % (reverse('details', args=(base.url,)), "Ваш комментарий добавлен"))
 
 def add(request):
     return render(request, 'bases/add.html', {})
