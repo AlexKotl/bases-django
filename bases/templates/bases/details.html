@@ -53,12 +53,11 @@
                 "{{ comment.band }}"
             {% endif %}
         </b>
-        <small>".substr($row_comments[date],0,10)."</small> <br>
+        <small>{{ comment.date }}</small> <br>
         {{ comment.content }} <br>
-        Оценка базы: {{ comment.rating | draw_stars }}
+        Оценка базы: {{ comment.rating | draw_stars | safe }}
     </div>
     {% endfor %}
-
 
     if ($is_rated_comment[$id]=='yes') $rating_html = "<i>Вы уже голосовали</i>";
     else $rating_html = "<label for='rate0'><input type='radio' name='rating' id='rate0' value='' checked='checked'>нет</label>

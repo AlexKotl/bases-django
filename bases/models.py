@@ -75,3 +75,4 @@ class Comments(models.Model):
     class Meta:
         managed = False
         db_table = 'comments'
+        ordering = ['-id']
