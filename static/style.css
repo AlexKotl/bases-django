@@ -76,8 +76,15 @@ div {box-sizing: border-box;}
 	float: right;
 	width: 40%;
 }
-.baseDetails .gallery img {
-	width: 100%;
+.baseDetails .gallery div {
+	margin:5px;
+    border:1px dashed #B5B1B0;
+    background-color:#EBF0FA;
+    background-size: cover;
+    background-position: center;
+    height: 0;
+    padding-bottom: 70%;
+    width: 100%;
 	display: block;
 }
 
