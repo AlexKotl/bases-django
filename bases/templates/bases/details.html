@@ -2,6 +2,7 @@
 
 {% load static %}
 {% load draw_stars %}
+{% load format_plain_text %}
 
 {% block site_title %}{{ base.name }} - репетиционная база в Киеве. Реп база на base.address{% endblock %}
 {% block site_description %}Информация про репетиционную базу {{ base.name }}, цены, контакты, расположение на карте. Реп база в Киеве, {{ base.address }}{% endblock %}
@@ -47,11 +48,12 @@
             <div style='background-color:#fff; border:1px solid #CECECE; width:400px; padding:10px'>
                 [LOCATION]
                 <b>Адрес:</b> {{ base.address }}
-                <p><b>Контакты:</b> {{ base.contacts }}
-                <p> <span id='rate_imgs'>
-                    [BASE_RATING]
+                <p><b>Контакты:</b> {{ base.contacts | format_plain_text | safe }}
+                <p>
+                <span id='rate_imgs'>
+                    {{ base.rating | draw_stars | safe }}
                 </span>
-                <span id='book_rate'>{{ base..rating }}</span> балла ({{ base.votes }})
+                <span id='book_rate'>{{ base.rating }}</span> балла ({{ base.votes }})
                 {% if base.votes == 0 %}
                     - Ваш голос будет первым
                 {% endif %}
@@ -67,7 +69,7 @@
         {% endif %}
 
         <p>
-            {{ base.description }}
+            {{ base.description | format_plain_text | safe }}
         </p>
 
         <h2>Отзывы</h2>
