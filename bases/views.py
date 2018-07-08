@@ -34,8 +34,10 @@ def list(request):
     })
 
 def details(request, base_name):
+    base = Base.objects.get(url=base_name)
     return render(request, 'bases/details.html', {
-        'base': Base.objects.get(url=base_name)
+        'base': base,
+        'is_voted': 'is_rated_comment[{id}]'.format(id=base.id) in request.COOKIES
     })
 
 def add(request):

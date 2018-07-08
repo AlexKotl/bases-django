@@ -8,6 +8,26 @@
 
 {% block content %}
 
+    <script type='text/javascript'>
+        function check_fill() {
+            if (document.getElementById('content').value.length<50) {
+                alert('Отзыв слишком короткий');
+                return(false);
+            }
+            car_form_var = document.getElementById('car_form');
+            for(var j=0; j<car_form_var.length; j++) {
+                if (((car_form_var[j].value == '-') || (car_form_var[j].value == '') || (car_form_var[j].value == 'select'))
+                && (car_form_var[j].type!='radio') && (car_form_var[j].type!='hidden') && (car_form_var[j].type!='file') && (car_form_var[j].type!='submit') && (car_form_var[j].name!='email_confirm')
+                )
+                {
+                    alert('Пожалуйста, заполните все поля!');
+                    car_form_var[j].focus();
+                    return(false);
+                }
+            }
+        }
+    </script>
+
     <div class='baseDetails'>
         <h1>
             <span style='color:#605B59; font-weight:normal'>Репетиционная база</span> {{ base.name }}
@@ -39,76 +59,89 @@
             </div>
         {% endif %}
 
-    <p>
-        {{ base.description }}
-    </p>
+        <p>
+            {{ base.description }}
+        </p>
 
-    <h2>Отзывы</h2>
+        <h2>Отзывы</h2>
 
-    {% for comment in base.comments %}
-    <div style='border:1px dotted #D2D2D2; margin-top:5px; padding:5px; background-color:#F9F9F9'>
-        <b>
-            {{ comment.name }}
-            {% if comment.band %}
-                "{{ comment.band }}"
-            {% endif %}
-        </b>
-        <small>{{ comment.date }}</small> <br>
-        {{ comment.content }} <br>
-        Оценка базы: {{ comment.rating | draw_stars | safe }}
-    </div>
-    {% endfor %}
+        {% for comment in base.comments %}
+        <div style='border:1px dotted #D2D2D2; margin-top:5px; padding:5px; background-color:#F9F9F9'>
+            <b>
+                {{ comment.name }}
+                {% if comment.band %}
+                    "{{ comment.band }}"
+                {% endif %}
+            </b>
+            <small>{{ comment.date }}</small> <br>
+            {{ comment.content }} <br>
+            Оценка базы: {{ comment.rating | draw_stars | safe }}
+        </div>
+        {% endfor %}
 
-    if ($is_rated_comment[$id]=='yes') $rating_html = "<i>Вы уже голосовали</i>";
-    else $rating_html = "<label for='rate0'><input type='radio' name='rating' id='rate0' value='' checked='checked'>нет</label>
-    <label for='rate1'><input type='radio' name='rating' id='rate1' value='1'>1</label>
-    <label for='rate2'><input type='radio' name='rating' id='rate2' value='2'>2</label>
-    <label for='rate3'><input type='radio' name='rating' id='rate3' value='3'>3</label>
-    <label for='rate4'><input type='radio' name='rating' id='rate4' value='4'>4</label>
-    <label for='rate5'><input type='radio' name='rating' id='rate5' value='5'>5</label>";
 
-    <form action='' method='post' id='car_form' onsubmit=\"return check_fill();\">
-    <input type='hidden' name='action' value='write_comment'>
-    <table>
-    <tr><td style='text-align:left'>Ваше имя:</td><td><input type='text' name='name' style='width:100%'></td></tr>
-    <tr><td style='text-align:left'>Группа:</td><td><input type='text' name='band' style='width:100%'></td></tr>
-    <tr><td style='text-align:left'>Email*:</td><td>
-    <input type='text' name='email' style='width:100%'>
-    <input type='text' name='email_confirm' style='width:100%; display:none'>
-    </td></tr>
-    <tr><td style='text-align:left'>Оценка базы**:</td><td>
-    $rating_html
-    </td></tr>
-    <tr><td colspan='2' style='text-align:left'>Комментарии: <br> <textarea rows=4 cols=0 name='content' id='content' style='width:100%'></textarea> </td></tr>
-    <tr><td colspan='2' style='text-align:right'>Введите код:  <img src='inc/captcha.php?number=$security_code' alt=''> <input type='text' size='6' name='security'>
-    <input type='hidden' name='security_confirm' value='$security_code'></td></tr>
-    <tr><td colspan='2'>
-    <small>* адрес email не будет опубликован на сайте<br>** оценка при текстовом отзыве засчитывается как 3 голоса сразу <br>
-    <font color='red'>Для администраторов баз: данная форма предназначена исключительно для посетителей базы.<br> Любые споры и попытки убедить посетителей в крутости своей базы будут удалены.<br> Для обновления информации используйте кнопку \"Сообщить об изменениях\"</font>
-    <br>Отзывы с неправдивой информацией (группа, email),<br> а также необоснованные отзывы с заниженным <br>или завышенным рейтингом будут удалены
-    </small>
-    <br><input type='submit' name='submit_but' value='Добавить отзыв'></td></tr>
-    </table>
-    </form>
-    <script type='text/javascript'>
-    function check_fill() {
-    if (document.getElementById('content').value.length<50) {
-    alert('Отзыв слишком короткий');
-    return(false);
-    }
-    car_form_var = document.getElementById('car_form');
-    for(var j=0; j<car_form_var.length; j++) {
-    if (((car_form_var[j].value == '-') || (car_form_var[j].value == '') || (car_form_var[j].value == 'select'))
-    && (car_form_var[j].type!='radio') && (car_form_var[j].type!='hidden') && (car_form_var[j].type!='file') && (car_form_var[j].type!='submit') && (car_form_var[j].name!='email_confirm')
-    )
-    {
-    alert('Пожалуйста, заполните все поля!');
-    car_form_var[j].focus();
-    return(false);
-    }
-    }
-    }
-    </script>
+
+        <form action='' method='post' id='car_form' onsubmit="return check_fill();">
+            <input type='hidden' name='action' value='write_comment'>
+            <table>
+                <tr>
+                    <td style='text-align:left'>Ваше имя:</td><td><input type='text' name='name' style='width:100%'></td>
+                </tr>
+                <tr>
+                    <td style='text-align:left'>Группа:</td><td><input type='text' name='band' style='width:100%'></td>
+                </tr>
+                <tr>
+                    <td style='text-align:left'>Email*:</td>
+                    <td>
+                        <input type='text' name='email' style='width:100%'>
+                        <input type='text' name='email_confirm' style='width:100%; display:none'>
+                    </td>
+                </tr>
+                <tr>
+                    <td style='text-align:left'>Оценка базы**:</td>
+                    <td>
+                        {% if is_voted %}
+                            <i>Вы уже голосовали</i>
+                        {% else %}
+                            <label for='rate0'><input type='radio' name='rating' id='rate0' value='' checked='checked'>нет</label>
+                            <label for='rate1'><input type='radio' name='rating' id='rate1' value='1'>1</label>
+                            <label for='rate2'><input type='radio' name='rating' id='rate2' value='2'>2</label>
+                            <label for='rate3'><input type='radio' name='rating' id='rate3' value='3'>3</label>
+                            <label for='rate4'><input type='radio' name='rating' id='rate4' value='4'>4</label>
+                            <label for='rate5'><input type='radio' name='rating' id='rate5' value='5'>5</label>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='2' style='text-align:left'>
+                        Комментарии: <br>
+                        <textarea rows=4 cols=0 name='content' id='content' style='width:100%'></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='2' style='text-align:right'>
+                        Введите код:  <img src='inc/captcha.php?number=$security_code' alt=''>
+                        <input type='text' size='6' name='security'>
+                        <input type='hidden' name='security_confirm' value='$security_code'>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='2'>
+                        <small>
+                            * адрес email не будет опубликован на сайте<br>** оценка при текстовом отзыве засчитывается как 3 голоса сразу <br>
+                            <font color='red'>
+                                Для администраторов баз: данная форма предназначена исключительно для посетителей базы.<br>
+                                Любые споры и попытки убедить посетителей в крутости своей базы будут удалены.<br>
+                                Для обновления информации используйте кнопку "Сообщить об изменениях"
+                            </font>
+                            <br>Отзывы с неправдивой информацией (группа, email),<br> а также необоснованные отзывы с заниженным <br>или завышенным рейтингом будут удалены
+                        </small>
+                        <br><input type='submit' name='submit_but' value='Добавить отзыв'>
+                    </td>
+                </tr>
+            </table>
+        </form>
+
     </div>
 
 {% endblock %}
