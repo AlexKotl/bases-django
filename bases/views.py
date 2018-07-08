@@ -62,3 +62,6 @@ def add_comment(request, base_id):
 
 def add(request):
     return render(request, 'bases/add.html', {})
+
+def contacts(request):
+    return render(request, 'bases/contacts.html')
