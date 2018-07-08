@@ -1,6 +1,7 @@
 import re
 from .models import Base
 from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponseRedirect
 from django.urls import reverse
 
 def map(request):
@@ -39,6 +40,10 @@ def details(request, base_name):
         'base': base,
         'is_voted': 'is_rated_comment[{id}]'.format(id=base.id) in request.COOKIES
     })
+
+def add_comment(request, base_id):
+    base = get_object_or_404(Base, pk=base_id)
+    return HttpResponseRedirect(reverse('details', args=(base.url,)))
 
 def add(request):
     return render(request, 'bases/add.html', {})
