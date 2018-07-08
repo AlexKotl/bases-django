@@ -1,0 +1,146 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <script src='http://cdn.leafletjs.com/leaflet-0.5/leaflet.js'></script>
+
+    <script>
+        var markersArray = [];
+        function initMaps() {
+
+            var haightAshbury = new google.maps.LatLng(50.455203,30.511413);
+            var mapOptions = {
+                zoom: 14,
+                center: haightAshbury,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+
+            google.maps.event.addListener(map, 'click', function(event) {
+                addMarker(event.latLng);
+            });
+
+            var marker = new google.maps.Marker({
+                position: haightAshbury,
+                map: map
+            });
+
+            markersArray.push(marker);
+        }
+
+        function addMarker(location) {
+            deleteOverlays();
+            marker = new google.maps.Marker({
+                position: location,
+                map: map
+            });
+            markersArray.push(marker);
+            document.getElementById('pos_y').value = location.lat();
+            document.getElementById('pos_x').value = location.lng(); // should be jb
+        }
+
+        function deleteOverlays() {
+            if (markersArray) {
+                for (i in markersArray) {
+                    markersArray[i].setMap(null);
+                }
+                markersArray.length = 0;
+            }
+        }
+    </script>
+
+    <script type='text/javascript' src='https://maps.googleapis.com/maps/api/js?key=AIzaSyCVMQO9ASVnYw6XIWotOftE7cTs5ZV_ETU'>	</script>
+
+    <script>
+        // convert a single digit (0 - 16) into hex
+        function enHex(aDigit) {
+            return("0123456789ABCDEF".substring(aDigit, aDigit+1))
+        }
+    </script>
+
+
+    <form action='index.php?module=add&submit_but=1' method='post' enctype='multipart/form-data' id='add_form' style="padding:15px 20px">
+        <div style=' background-color:#F5F5F5; border:1px solid #C1C1C1;padding:10px'>
+            <h3>Расположение</h3>
+            <div class='cellsBlock'>
+                <div class='cellLeft'>Адрес (улица, дом): </div>
+                <div class='cellRight'><input type='text' name='address' style='width:100%' required> </div>
+                <div class='cellHint'>Например: <i>Прорезная 12</i></div>
+                <br class='clearBoth'>
+            </div>
+            <div class='cellsBlock'>
+                <div class='cellLeft'>Контакты: </div>
+                <div class='cellRight'><textarea name='contacts' style='width:100%'></textarea></div>
+                <div class='cellHint'>Контактная информация: телефоны, email адреса и т.д.</div>
+                <br class='clearBoth'>
+            </div>
+            <div class='cellsBlock'>
+                <input type='hidden' id='pos_x' name='pos_x' value='Перетащите маркер'>
+                <input type='hidden' id='pos_y' name='pos_y'>
+                <p> Кликните на карте для установки красного маркера.
+                <p> Используйте колесико мыши для изменения масштаба. Попытайтесь дать наиболее точное место расположения при максимальном масштабе! <br>
+
+                <link href='http://code.google.com/apis/maps/documentation/javascript/examples/standard.css' />
+
+                <div id='map_canvas' style='width: 600px; height: 400px; background-color: #faf5e6;'></div>
+            </div>
+        </div>
+
+        <p>
+        <div style=' background-color:#F5F5F5; border:1px solid #C1C1C1; padding:10px'>
+            <h3>Описание</h3>
+            <div class='cellsBlock'>
+                <div class='cellLeft'>Название базы: </div>
+                <div class='cellRight'><input type='text' name='name' style='width:100%' required></div>
+                <div class='cellHint'>Введите название базы (без кавычек). Если это поле не будет заполнено - система сама сгенерирует название на основании адреса.</div>
+                <br class='clearBoth'><br class='clearBoth'>
+            </div>
+            <div class='cellsBlock'>
+                <div class='cellLeft'>Средняя цена за час: </div>
+                <div class='cellRight'><input type='number' required name='price' style='width:20%'> грн</div>
+                <div class='cellHint'>Введите среднюю цену за час (участвует в поиске). Полный перечень цен и скидок можете указать в поле \"Описание\".</div>
+                <br class='clearBoth'>
+            </div>
+            <div class='cellsBlock'>
+                <div class='cellLeft'>Описание: </div>
+                <div class='cellRight' style='width:80%'><textarea name='description' style='width:100%; height:200px'></textarea> </div>
+                <br class='clearBoth'>
+            </div>
+            <div class='cellsBlock'>
+                <div class='cellLeft'>Email администратора: </div>
+                <div class='cellRight'><input type='text' name='email' required style='width:100%'> </div>
+                <div class='cellHint'>Данный адрес Email <b>не</b> будет публиковаться на сайте и будет использоваться исключительно для входа в панель управления и связи с администратором.</div>
+                <br class='clearBoth'>
+            </div>
+            <div class='cellsBlock'>
+                <div class='cellLeft'>Пароль: </div>
+                <div class='cellRight'><input type='password' required name='password' style='width:100%'> </div>
+                <div class='cellHint'>Выберите желаемый пароль для доступа к редактированию базы.</div>
+                <br class='clearBoth'>
+            </div>
+        </div>
+
+        <p>
+        <div style=' background-color:#F5F5F5; border:1px solid #C1C1C1; padding:10px'>
+            <h3>Фотографии</h3>
+            <div class='cellsBlock'>
+                <div class='cellLeft'>Фотографии: </div>
+                <div class='cellRight'>
+                    {% for num in "12345" %}
+                        <input type='file' name='UFile[{{ forloop.counter0 }}]' style='width:100%'><br>
+                    {% endfor %}
+                </div>
+                <div class='cellHint'>Вы можете добавить до 5 фотографий базы.</div>
+                <br class='clearBoth'>
+            </div>
+        </div>
+
+        <p>
+        <div style=' background-color:#F5F5F5; border:1px solid #C1C1C1; padding:10px'>
+            <p><div class='g-recaptcha' data-sitekey='6Lc60FEUAAAAADlX54VYEjGxzniqH4wbU7euyL_R'></div>
+            <p><button type='submit' name='submit_but' id='submit_but' class='cms-button'>
+                Добавить базу
+            </button>
+        </div>
+
+    </form>
+{% endblock %}
