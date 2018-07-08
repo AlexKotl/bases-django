@@ -59,6 +59,9 @@ class Base(models.Model):
                 images.append("{server}/{base_id}_{num}.jpg".format(server=PHOTOS_SERVER, base_id=self.id, num=num))
         return images
 
+    def comments(self):
+        return Comments.objects.filter(base_id=self.id)
+
 class Comments(models.Model):
     base = models.ForeignKey(Base, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)

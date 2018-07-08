@@ -45,10 +45,20 @@
 
     <h2>Отзывы</h2>
 
-    <div style='border:1px dotted #D2D2D2; margin-top:5px; padding:5px; background-color:#F9F9F9'><b>$row_comments[name]$band</b>  <small>".substr($row_comments[date],0,10)."</small>
-    <br>$row_comments[content]
-    <br>Оценка базы: ".get_rating_view($row_comments[rating])."
+    {% for comment in base.comments %}
+    <div style='border:1px dotted #D2D2D2; margin-top:5px; padding:5px; background-color:#F9F9F9'>
+        <b>
+            {{ comment.name }}
+            {% if comment.band %}
+                "{{ comment.band }}"
+            {% endif %}
+        </b>
+        <small>".substr($row_comments[date],0,10)."</small> <br>
+        {{ comment.content }} <br>
+        Оценка базы: {{ comment.rating | draw_stars }}
     </div>
+    {% endfor %}
+
 
     if ($is_rated_comment[$id]=='yes') $rating_html = "<i>Вы уже голосовали</i>";
     else $rating_html = "<label for='rate0'><input type='radio' name='rating' id='rate0' value='' checked='checked'>нет</label>
