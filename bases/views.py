@@ -41,7 +41,7 @@ def details(request, base_name):
     return render(request, 'bases/details.html', {
         'base': base,
         'is_voted': 'is_rated_comment[{id}]'.format(id=base.id) in request.COOKIES,
-        'sys_message': request.GET['message']
+        'sys_message': request.GET.get('message')
     })
 
 def add_comment(request, base_id):
