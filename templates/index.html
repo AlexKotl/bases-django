@@ -49,9 +49,11 @@
     </div>
 
     <div class='contentDiv'>
-        {% block sys_message %}
-
-        {% endblock %}
+        {% if sys_message %}
+            <div class="sys-message">
+                {{ sys_message }}
+            </div>
+        {% endif %}
 
         {% block content %}
             Main block

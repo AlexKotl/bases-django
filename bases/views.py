@@ -1,4 +1,5 @@
 import re
+import urllib
 from .models import Base
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
@@ -38,12 +39,13 @@ def details(request, base_name):
     base = Base.objects.get(url=base_name)
     return render(request, 'bases/details.html', {
         'base': base,
-        'is_voted': 'is_rated_comment[{id}]'.format(id=base.id) in request.COOKIES
+        'is_voted': 'is_rated_comment[{id}]'.format(id=base.id) in request.COOKIES,
+        'sys_message': request.GET['message']
     })
 
 def add_comment(request, base_id):
     base = get_object_or_404(Base, pk=base_id)
-    return HttpResponseRedirect(reverse('details', args=(base.url,)))
+    return HttpResponseRedirect('%s?message=%s' % (reverse('details', args=(base.url,)), "Comment added"))
 
 def add(request):
     return render(request, 'bases/add.html', {})
