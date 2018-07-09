@@ -44,6 +44,12 @@ def details(request, base_name):
         'sys_message': request.GET.get('message')
     })
 
+def base_location(request, base_name):
+    base = Base.objects.get(url=base_name)
+    return render(request, 'bases/map.html', {
+        'base': base,
+    })
+
 def add_comment(request, base_id):
     base = get_object_or_404(Base, pk=base_id)
     comment = Comments(

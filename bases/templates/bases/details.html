@@ -47,7 +47,15 @@
 
         {% if base.flag == 'ok' %}
             <div style='background-color:#fff; border:1px solid #CECECE; width:400px; padding:10px'>
-                [LOCATION]
+                {% if base.pos_x > 0 %}
+                <div style='float:right; text-align:center; border:1px dotted #DDDDDD; padding:5px; background-color:#F2F2F2'>
+                    <a href='{% url 'base_location' base.url %}'>
+                        <img src='{%static 'images/map_64.png' %}' alt='Поиск репетиционной базы на карте' title='Поиск репетиционной базы на карте'><br>
+                        Показать на карте
+                    </a>
+                </div>
+                {% endif %}
+
                 <b>Адрес:</b> {{ base.address }}
                 <p><b>Контакты:</b> {{ base.contacts | format_plain_text | safe }}
                 <p>
