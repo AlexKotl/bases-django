@@ -43,7 +43,14 @@
                 '{% static base.marker %}',
                 {{ base.zindex }}
             );
+
+            {% if single_base %}
+                map.setCenter(new google.maps.LatLng({{ base.pos_y }}, {{ base.pos_x }}));
+                map.setZoom(17);
+            {% endif %}
         {% endfor %}
+
+
 
     }
 

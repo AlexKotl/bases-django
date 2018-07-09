@@ -46,8 +46,13 @@ def details(request, base_name):
 
 def base_location(request, base_name):
     base = Base.objects.get(url=base_name)
+    base.marker = 'images/markers/pointer_red.png'
+    base.description = base.description.replace('"', '\"')
+    base.description = re.sub('\s+', ' ', base.description)
+
     return render(request, 'bases/map.html', {
-        'base': base,
+        'bases': [base],
+        'single_base': True,
     })
 
 def add_comment(request, base_id):
