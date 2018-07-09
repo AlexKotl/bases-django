@@ -57,33 +57,38 @@
 </script>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVMQO9ASVnYw6XIWotOftE7cTs5ZV_ETU">	</script>
 
-<div id='slides'>
-    <a href="#" class="slidesjs-previous slidesjs-navigation"><span class="icon nav next"></span></a>
-    <a href="#" class="slidesjs-next slidesjs-navigation"><span class="icon nav prev"></span></a>
+{% if single_base %}
+    <h1>{{ base.name }}</h1>
+{% else %}
+    <div id='slides'>
+        <a href="#" class="slidesjs-previous slidesjs-navigation"><span class="icon nav next"></span></a>
+        <a href="#" class="slidesjs-next slidesjs-navigation"><span class="icon nav prev"></span></a>
 
-    <div class='hotItems desktop'>
+        <div class='hotItems desktop'>
+            {% for base in bases_latest %}
+                <a class='item {% if base.vip > 0 %}vip{% endif %}' href='{% url 'details' base.url %}'>
+                    <div class='header'>{{ base.name }}</div>
+                    <div class='rating'>{{ base.rating | draw_stars | safe }}</div>
+                    <div class='main'>{{ base.address }}</div>
+                </a>
+                {% if forloop.counter == 6 %}
+                    </div> <div class='hotItems'>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="hotItems mobile">
         {% for base in bases_latest %}
             <a class='item {% if base.vip > 0 %}vip{% endif %}' href='{% url 'details' base.url %}'>
                 <div class='header'>{{ base.name }}</div>
                 <div class='rating'>{{ base.rating | draw_stars | safe }}</div>
                 <div class='main'>{{ base.address }}</div>
             </a>
-            {% if forloop.counter == 6 %}
-                </div> <div class='hotItems'>
-            {% endif %}
         {% endfor %}
     </div>
-</div>
+{% endif %}
 
-<div class="hotItems mobile">
-    {% for base in bases_latest %}
-        <a class='item {% if base.vip > 0 %}vip{% endif %}' href='{% url 'details' base.url %}'>
-            <div class='header'>{{ base.name }}</div>
-            <div class='rating'>{{ base.rating | draw_stars | safe }}</div>
-            <div class='main'>{{ base.address }}</div>
-        </a>
-    {% endfor %}
-</div>
 
 <div id='map_canvas' ></div>
 
