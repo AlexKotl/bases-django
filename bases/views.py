@@ -1,10 +1,12 @@
 import re
 import urllib
 import datetime
+from captcha import captcha
 from .models import Base, Comments
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from .settings_private import *
 
 def map(request):
     bases = Base.get_all(request)
@@ -57,19 +59,25 @@ def base_location(request, base_name):
 
 def add_comment(request, base_id):
     base = get_object_or_404(Base, pk=base_id)
-    comment = Comments(
-        base_id=base_id,
-        name=request.POST['name'],
-        email=request.POST['email'],
-        band=request.POST['band'],
-        content=request.POST['content'],
-        rating=request.POST['rating'],
-        date=datetime.datetime.now(),
-        ip=request.META.get('REMOTE_ADDR')
-    )
-    comment.save()
 
-    return HttpResponseRedirect('%s?message=%s' % (reverse('details', args=(base.url,)), "Ваш комментарий добавлен"))
+    if captcha.validate(request, RECAPTCHA_PRIVATE_KEY):
+        comment = Comments(
+            base_id=base_id,
+            name=request.POST.get('name', ''),
+            email=request.POST.get('email', ''),
+            band=request.POST.get('band', ''),
+            content=request.POST.get('content', ''),
+            rating=request.POST.get('rating', 0),
+            date=datetime.datetime.now(),
+            ip=request.META.get('REMOTE_ADDR')
+        )
+        comment.save()
+        sys_message = 'Ваш комментарий добавлен'
+    else:
+        sys_message = 'Вы не прошли проверку Captcha'
+
+
+    return HttpResponseRedirect('%s?message=%s' % (reverse('details', args=(base.url,)), sys_message))
 
 def add(request):
     return render(request, 'bases/add.html', {})
