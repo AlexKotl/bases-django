@@ -58,7 +58,12 @@
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVMQO9ASVnYw6XIWotOftE7cTs5ZV_ETU">	</script>
 
 {% if single_base %}
-    <h1>{{ base.name }}</h1>
+    <div style="padding: 10px 15px;">
+        {% for base in bases %}
+            <h1>{{ base.name }}</h1>
+            <h3>{{ base.address }}</h3>
+        {% endfor %}
+    </div>
 {% else %}
     <div id='slides'>
         <a href="#" class="slidesjs-previous slidesjs-navigation"><span class="icon nav next"></span></a>
