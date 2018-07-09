@@ -74,7 +74,7 @@ def add_comment(request, base_id):
         comment.save()
         sys_message = 'Ваш комментарий добавлен'
     else:
-        sys_message = 'Вы не прошли проверку Captcha'
+        sys_message = 'Ошибка: Вы не прошли проверку Captcha'
 
 
     return HttpResponseRedirect('%s?message=%s' % (reverse('details', args=(base.url,)), sys_message))

@@ -75,6 +75,10 @@ div {box-sizing: border-box;}
     padding:10px;
     background-color:#EEFCEB;
 }
+.sys-message.error {
+    background-color: #ffb1b1;
+    border-color: #d86666;
+}
 
 .cms-button {
     font-size: 14px;

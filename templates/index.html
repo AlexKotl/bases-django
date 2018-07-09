@@ -50,7 +50,7 @@
 
     <div class='contentDiv'>
         {% if sys_message %}
-            <div class="sys-message">
+            <div class="sys-message {% if 'Ошибка' in sys_message %} error {% endif %}">
                 {{ sys_message }}
             </div>
         {% endif %}
