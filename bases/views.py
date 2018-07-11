@@ -78,16 +78,5 @@ def add_comment(request, base_id):
 
     return HttpResponseRedirect('%s?message=%s' % (reverse('details', args=(base.url,)), sys_message))
 
-def add_submit(request):
-    return HttpResponseRedirect(reverse('add_done'))
-
-def add_done(request):
-    return render(request, 'bases/add_done.html', {})
-
-def add(request):
-    return render(request, 'bases/add.html', {
-        'sys_message': request.GET.get('message')
-    })
-
 def contacts(request):
     return render(request, 'bases/contacts.html')
