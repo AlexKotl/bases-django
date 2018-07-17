@@ -63,10 +63,11 @@ div {box-sizing: border-box;}
 #table_stock td.image {float:right; display: block; width: 45%; margin-left: 10px; background-color: white; padding: 2px; border:1px solid #cccccc; box-shadow: 0px 1px 2px #b5b5b5}
 #table_stock td.image img {width: 100%; display: block;}
 
-#add_form .cellsBlock {display: block; clear: both; margin: 10px 0; padding:10px 0; border-top: 1px dotted #c5c5c5}
-#add_form .cellLeft {float:left; width:25%; font-size: 14px;}
-#add_form .cellRight {float:left; width:40%; }
-#add_form .cellHint {float:right; width:20%; color:#7c7c7c}
+.add-form .cellsBlock {display: block; clear: both; margin: 10px 0; padding:10px 0; border-top: 1px dotted #c5c5c5}
+.add-form .cellLeft {float:left; width:25%; font-size: 14px;}
+.add-form .cellRight {float:left; width:40%; }
+.add-form .cellRight input, .add-form .cellRight textarea {width: 100%;}
+.add-form .cellHint {float:right; width:20%; color:#7c7c7c}
 #slides {display: none !important;}
 
 .sys-message {
