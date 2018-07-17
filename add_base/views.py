@@ -3,6 +3,7 @@ from bases.models import Base, Comments
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from .form import AddForm
 
 def process_images(request):
     for file in request.FILES:
@@ -19,5 +20,6 @@ def add_done(request):
 
 def add(request):
     return render(request, 'bases/add.html', {
-        'sys_message': request.GET.get('message')
+        'sys_message': request.GET.get('message'),
+        'form': AddForm(),
     })
