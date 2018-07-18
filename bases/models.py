@@ -1,5 +1,6 @@
 from django.db import models
 import os.path
+from datetime import datetime
 from .settings_private import *
 
 class Base(models.Model):
@@ -11,8 +12,8 @@ class Base(models.Model):
     address = models.CharField(max_length=255)
     contacts = models.CharField(max_length=255)
     price = models.CharField(max_length=50)
-    date_added = models.DateTimeField('Date created')
-    date_edited = models.DateTimeField('Date edited')
+    date_added = models.DateTimeField('Date created', default=datetime.now)
+    date_edited = models.DateTimeField('Date edited', default=datetime.now)
     flag = models.CharField(max_length=10)
     rating = models.FloatField(default=0)
     votes = models.IntegerField(default=0)
