@@ -19,7 +19,8 @@ def login(request):
     return render(request, 'control/login.html')
 
 def auth(request):
-    if True:
+    # if admin
+    if request.POST.get('login') == CMS_ADMIN_LOGIN and request.POST.get('password') == CMS_ADMIN_PASSWORD:
         request.session['access_level'] = 1
     return HttpResponseRedirect(reverse('list'))
 

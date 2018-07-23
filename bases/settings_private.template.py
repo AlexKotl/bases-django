@@ -10,3 +10,6 @@ PHOTOS_SERVER = ''
 
 RECAPTCHA_PUBLIC_KEY = 'MyRecaptchaKey123'
 RECAPTCHA_PRIVATE_KEY = 'MyRecaptchaPrivateKey456'
+
+CMS_ADMIN_LOGIN = 'admin'
+CMS_ADMIN_PASSWORD = 'admin'
