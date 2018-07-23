@@ -1,6 +1,7 @@
 {% extends "control/cms.html" %}
 {% block overall_content %}
-<form action=index.php method=post><center>
+<form action="{% url "auth" %}" method=post><center>
+    {% csrf_token %}
     <table height=80%>
         <tr>
             <td>
