@@ -10,7 +10,7 @@
                     <td><a href='index.php'><b>CMS </b></a></td>
                     <td>Bases</td>
                     <td style='text-align:right'>
-                        <a href='index.php?action=exit'><b><img src='images/exit.gif'> Выйти</b></a>
+                        <a href='{% url 'logout' %}'><b><img src='images/exit.gif'> Выйти</b></a>
                     </td>
                 </tr>
             </table>
@@ -93,7 +93,7 @@
                     <td></td>
                     <td></td>
                     <td style='text-align:right'>
-                        <a href='logout'><b><img src='images/exit.gif'> Выйти</b></a>
+                        <a href='{% url 'logout' %}'><b><img src='images/exit.gif'> Выйти</b></a>
                     </td>
                 </tr>
             </table>

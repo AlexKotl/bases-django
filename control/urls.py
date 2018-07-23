@@ -5,5 +5,6 @@ urlpatterns = [
     path('', views.list, name='list'),
     path('login', views.login, name='login'),
     path('auth', views.auth, name='auth'),
+    path('logout', views.logout, name='logout'),
     #path('/submit', views.add_submit, name='add_submit'),
 ]
