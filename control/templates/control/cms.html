@@ -1,0 +1,104 @@
+{% extends "control/index.html" %}
+
+{% block overall_content %}
+
+<table border=0 width=100% height=100% cellspacing=0 cellpadding=0>
+    <tr>
+        <td colspan=3 bgcolor='#ffffff' height=20 align=center>
+            <table width=100% border=0>
+                <tr>
+                    <td><a href='index.php'><b>CMS </b></a></td>
+                    <td>Bases</td>
+                    <td style='text-align:right'>
+                        <a href='index.php?action=exit'><b><img src='images/exit.gif'> Выйти</b></a>
+                    </td>
+                </tr>
+            </table>
+
+        </td>
+    </tr>
+    <tr>
+        <td valign=top  style='width:230px;' align=center bgcolor='white'>
+
+            <table width=230 cellspacing=0 cellpadding=0 border=0 bgcolor='#BEBEBE'>
+                <tr><th><img src='images/arr.gif'> &nbsp; Инфо</th></tr>
+                <tr>
+                    <td class=menu bgcolor=white style='padding:10px'>
+                        Добро пожаловать в центр управления репетиционными базами.
+                        <br>Выберите базу из списка ниже.
+                        <p><span style='font-size:16px; '>На вашем счету: <b><?= (int)$user_row[balance] ?></b> грн</span>
+                        <br><a href='?module=profile' style='color:#13680c; font-size:11px'><u>Пополнить счет</u></a>
+
+                    </td>
+                </tr>
+            </table>
+
+            {% if true %}
+                <table width=230 cellspacing=1 cellpadding=0 bgcolor='BEBEBE'>
+                    <tr>
+                        <th>
+                            <img src='images/arr.gif'> &nbsp; Admin menu
+                        </th>
+                    </tr>
+                    <tr>
+                        <td class=menu>
+
+                            <div id='menu'>
+                                <ul>
+                                    <li> <a href='index.php?module=bases' class='menu'><b><img src='images/list.gif'> &nbsp;&nbsp; Список баз </b></a></li>
+                                    <li> <a href='index.php?module=statistics' class='menu'><b><img src='images/statisti.gif'> &nbsp;&nbsp; Статистика</b></a></li>
+                                    <li> <a href='index.php?module=tools' class='menu'><b><img src='images/tools.gif'> &nbsp;&nbsp; Tools</b></a></li>
+                                    <li> <a href='index.php?module=log' class='menu'><b><img src='images/log.gif'> &nbsp;&nbsp; System log</b></a></li>
+                                </ul>
+                            </div>
+
+                        </td>
+                    </tr>
+                </table>
+            {% else %}
+                <table width=230 cellspacing=1 cellpadding=0 bgcolor='BEBEBE'>
+                    <tr>
+                        <th>
+                            <img src='images/arr.gif'> &nbsp; Репететиционные базы
+                        </th>
+                    </tr>
+                    <tr>
+                        <td class=menu>
+                            <div id='menu'>
+                                <ul>
+                                    <li> <a href='index.php?module=bases&id=$row[id]&action=edit_item' class='menu'><b><img src='images/list.gif'> &nbsp;&nbsp; $row[name] </b></a></li>
+                                    <li> <a href='index.php?module=blacklist' class='menu'><b><img src='images/delete.gif'> &nbsp;&nbsp; Черный список групп</b></a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            {% endif %}
+        </td>
+
+        <td style='width:5px'> </td>
+        <td valign=top width=85%>
+
+            {% block content %}
+                Main block
+            {% endblock %}
+
+        </td>
+    </tr>
+    <tr>
+        <th colspan=4>
+            <table width=100%>
+                <tr>
+                    <td>Copyright &copy; 2009-{% now "Y" %}</td>
+                    <td></td>
+                    <td></td>
+                    <td style='text-align:right'>
+                        <a href='logout'><b><img src='images/exit.gif'> Выйти</b></a>
+                    </td>
+                </tr>
+            </table>
+        </th>
+    </tr>
+</table>
+
+{% endblock %}
