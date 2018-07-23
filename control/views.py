@@ -18,6 +18,9 @@ def list(request):
 def login(request):
     return render(request, 'control/login.html')
 
+def remind(request):
+    return render(request, 'control/remind.html')
+
 def auth(request):
     # if admin
     if request.POST.get('login') == CMS_ADMIN_LOGIN and request.POST.get('password') == CMS_ADMIN_PASSWORD:

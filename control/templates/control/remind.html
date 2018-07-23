@@ -8,18 +8,11 @@
             {% csrf_token %}
             <fieldset>
                 <div class="pure-control-group">
-                    <label>Email:</label>
+                    <label>Ваш email:</label>
                     <input type="text" name="login">
                 </div>
-
-                <div class="pure-control-group">
-                    <label>Пароль:</label>
-                    <input type="password" name="password">
-                </div>
-
                 <div class="pure-controls">
-                    <input type="submit" value='Войти' class="pure-button pure-button-primary"> <br><br>
-                    <a href='{% url 'remind' %}'>Забыли пароль?</a>
+                    <input type="submit" value='Восстановить пароль' class="pure-button pure-button-primary"> <br><br>
                 </div>
 
             </fieldset>
