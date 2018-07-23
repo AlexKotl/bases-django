@@ -1,3 +1,28 @@
 {% extends "control/cms.html" %}
-    Login
+{% block overall_content %}
+<form action=index.php method=post><center>
+    <table height=80%>
+        <tr>
+            <td>
+                <table cellpadding=3 cellspacing=0 style='border:1px solid #6BA1C7;font-family: Arial;' bgcolor='white'>
+                    <tr>
+                        <td colspan=2 style='background: url(images/pict_16.jpg) repeat-x; color: #FFFFFF; height: 22px;'><b>Control panel login:</b></td>
+                    </tr>
+                    <tr>
+                        <td> Email: </td>
+                        <td> <input type=text name=login></td>
+                    </tr>
+                    <tr>
+                        <td> Пароль: </td>
+                        <td> <input type=password name=password></td>
+                    </tr>
+                    <tr>
+                        <td colspan=1> <small>  <a href='remind.php'>Забыли пароль?</a></small> </td>
+                        <td align=right> <input type=submit value='Login'></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</form>
 {% endblock %}
