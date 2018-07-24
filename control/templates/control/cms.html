@@ -3,9 +3,26 @@
 {% block overall_content %}
 
 <div id="menu">
+    <div class="add-padding" style="margin: 30px 0 10px 0; color: #ccc">
+        Меню
+    </div>
     <div class="list">
-        <a href="{% url 'dashboard' %}" class="pure-menu-link">Главная</a>
-        <a href="{% url 'logout' %}" class="pure-menu-link">Выйти</a>
+        <a href="{% url 'dashboard' %}" class="pure-menu-link">
+            <i class="fa fa-home"></i>
+            Список баз
+        </a>
+        <a href="{% url 'dashboard' %}" class="pure-menu-link">
+            <i class="fa fa-coins"></i>
+            Пополнить баланс
+        </a>
+        <a href="{% url 'dashboard' %}" class="pure-menu-link">
+            <i class="fa fa-user-secret"></i>
+            Черный список
+        </a>
+        <a href="{% url 'logout' %}" class="pure-menu-link">
+            <i class="fa fa-sign-out-alt"></i>
+            Выйти
+        </a>
 
 
     </div>

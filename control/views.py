@@ -32,8 +32,8 @@ def auth(request):
     # if admin
     if request.POST.get('login') == CMS_ADMIN_LOGIN and request.POST.get('password') == CMS_ADMIN_PASSWORD:
         request.session['access_level'] = 1
-    return HttpResponseRedirect(reverse('list'))
+    return HttpResponseRedirect(reverse('dashboard'))
 
 def logout(request):
     request.session.flush()
-    return HttpResponseRedirect(reverse('list'))
+    return HttpResponseRedirect(reverse('dashboard'))

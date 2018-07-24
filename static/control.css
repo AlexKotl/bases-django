@@ -4,6 +4,7 @@
     color: white;
     position: fixed;
     height: 100%;
+    box-shadow: inset -2px 0 6px #131313;
 }
 
 #menu .list a {
@@ -16,6 +17,14 @@
 
 #menu .list a:hover {
     color: black;
+}
+
+#menu .add-padding {
+    padding: 10px 10px;
+}
+
+#menu i {
+    margin-right: 7px;
 }
 
 #content {
