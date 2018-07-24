@@ -1,0 +1,14 @@
+{% extends "control/cms.html" %}
+
+{% block content %}
+    <h1>Репетиционные базы</h1>
+
+    {% for base in bases %}
+        <div class="cms-panel">
+            <h3>{{ base.name }}</h3>
+            {{ base.address }}
+
+            <p><a href="" class="pure-button pure-button-primary">Редактировать</a>
+        </div>
+    {% endfor %}
+{% endblock %}

@@ -3,18 +3,11 @@
 {% block overall_content %}
 
 <div id="menu">
-    <h3>
-        Карта репетиционных баз
-    </h3>
-    Добро пожаловать в центр управления репетиционными базами.
-    <br>Выберите базу из списка ниже
-    <p>На вашем счету: 0 грн</p>
+    <div class="list">
+        <a href="{% url 'dashboard' %}" class="pure-menu-link">Главная</a>
+        <a href="{% url 'logout' %}" class="pure-menu-link">Выйти</a>
 
-    <div>
-        <span class="pure-menu-heading">Базы</span>
-        <ul class="pure-menu-list">
-            <li class="pure-menu-item"><a href="#" class="pure-menu-link">Base 1</a></li>
-        </ul>
+
     </div>
 </div>
 

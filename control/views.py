@@ -10,6 +10,13 @@ def check_access(request, required=0):
         return False
     return True
 
+def dashboard(request):
+    if not check_access(request):
+        return HttpResponseRedirect(reverse('login'))
+    return render(request, 'control/dashboard.html', {
+        'bases': Base.objects.all(),
+    })
+
 def list(request):
     if not check_access(request):
         return HttpResponseRedirect(reverse('login'))
