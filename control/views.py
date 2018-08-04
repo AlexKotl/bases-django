@@ -22,6 +22,21 @@ def list(request):
         return HttpResponseRedirect(reverse('login'))
     return render(request, 'control/list.html', {})
 
+def edit_base(request, base_id):
+    base = Base.objects.get(pk=base_id)
+    return render(request, 'control/edit_base.html', {
+        'base': base,
+    })
+
+def save_base(request, base_id):
+    return HttpResponseRedirect(reverse('edit_base', {'base_id': base_id}))
+
+def block_base(request, base_id):
+    return HttpResponseRedirect(reverse('dashboard'))
+
+def unblock_base(request, base_id):
+    return HttpResponseRedirect(reverse('dashboard'))
+
 def login(request):
     return render(request, 'control/login.html')
 
