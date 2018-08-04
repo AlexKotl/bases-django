@@ -8,7 +8,16 @@
             <h3>{{ base.name }}</h3>
             {{ base.address }}
 
-            <p><a href="" class="pure-button pure-button-primary">Редактировать</a>
+            <p>
+                <a href="{% url 'edit_base' base.id %}" class="pure-button pure-button-primary">
+                    <i class="fa fa-pen"></i>
+                    Редактировать
+                </a>
+                <a href="{% url 'block_base' base.id %}" class="pure-button">
+                    <i class="fa fa-ban"></i>
+                    Деактивировать
+                </a>
+            </p>
         </div>
     {% endfor %}
 {% endblock %}
