@@ -1,5 +1,17 @@
 {% extends "control/cms.html" %}
 
 {% block content %}
-    <h1>{{ base.name }}</h1>
+    <h1>Редактирование</h1>
+
+    <form action="{% url 'save_base' base.id %}" method="post" class="pure-form pure-form-aligned">
+        {% csrf_token %}
+
+        {{ form }}
+
+
+        <button class="pure-button pure-button-primary">
+            <i class="fa fa-check"></i>
+            Сохранить
+        </button>
+    </form>
 {% endblock %}

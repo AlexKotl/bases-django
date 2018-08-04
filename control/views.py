@@ -3,6 +3,7 @@ from bases.models import Base, Comments
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from bases.settings_private import *
+from .form import BaseForm
 
 def check_access(request, required=0):
     ''' Checks for proper access level and redirects to login page '''
@@ -26,6 +27,7 @@ def edit_base(request, base_id):
     base = Base.objects.get(pk=base_id)
     return render(request, 'control/edit_base.html', {
         'base': base,
+        'form': BaseForm(),
     })
 
 def save_base(request, base_id):
