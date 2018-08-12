@@ -34,10 +34,11 @@ def edit_base(request, base_id):
             'price': base.price,
             'description': base.description,
         }),
+        'message': request.GET.get('message'),
     })
 
 def save_base(request, base_id):
-    return HttpResponseRedirect(reverse('edit_base', {'base_id': base_id}))
+    return HttpResponseRedirect('%s?message=%s' % (reverse('edit_base', args=(base_id,)), "Изменения сохранены"))
 
 def block_base(request, base_id):
     return HttpResponseRedirect(reverse('dashboard'))

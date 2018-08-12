@@ -37,3 +37,9 @@
     padding: 10px 20px;
     margin-bottom: 16px;
 }
+
+.cms-message {
+    background-color: #e0e8da;
+    padding: 20px 30px;
+    font-size: 18px;
+}

@@ -29,6 +29,12 @@
 </div>
 
 <div id="content">
+    {% if not message is empty %}
+        <div class="cms-message">
+            {{ message }}
+        </div>
+    {% endif %}
+
     {% block content %}
     {% endblock %}
 </div>
