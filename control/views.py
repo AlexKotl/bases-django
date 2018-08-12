@@ -27,7 +27,13 @@ def edit_base(request, base_id):
     base = Base.objects.get(pk=base_id)
     return render(request, 'control/edit_base.html', {
         'base': base,
-        'form': BaseForm(),
+        'form': BaseForm(initial = {
+            'address': base.address,
+            'name': base.name,
+            'contacts': base.contacts,
+            'price': base.price,
+            'description': base.description,
+        }),
     })
 
 def save_base(request, base_id):
