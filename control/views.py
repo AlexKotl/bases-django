@@ -38,6 +38,13 @@ def edit_base(request, base_id):
     })
 
 def save_base(request, base_id):
+    base = Base.objects.get(pk=base_id)
+    base.name = request.POST.get('name', '')
+    base.contacts = request.POST.get('contacts', '')
+    base.price = request.POST.get('price', 0)
+    base.description = request.POST.get('description', '')
+    base.save()
+
     return HttpResponseRedirect('%s?message=%s' % (reverse('edit_base', args=(base_id,)), "Изменения сохранены"))
 
 def block_base(request, base_id):
